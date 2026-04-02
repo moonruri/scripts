@@ -254,7 +254,7 @@ Write-Log "STEP 3: Refreshing winget sources..."
 
 $SourceExit = Invoke-Winget -WingetPath $Winget -Arguments @(
     "source", "update",
-    "--accept-source-agreements"
+    "--disable-interactivity"
 )
 
 if ($SourceExit -ne 0) {
@@ -276,7 +276,8 @@ Write-Log "STEP 4: Checking available upgrades..."
 Invoke-Winget -WingetPath $Winget -Arguments @(
     "upgrade",
     "--accept-source-agreements",
-    "--include-unknown"
+    "--include-unknown",
+    "--disable-interactivity"
 ) | Out-Null
 
 Write-Log "STEP 4: Complete."
@@ -310,7 +311,8 @@ $UpgradeExit = Invoke-Winget -WingetPath $Winget -Arguments @(
     "--scope", "machine",
     "--accept-package-agreements",
     "--accept-source-agreements",
-    "--include-unknown"
+    "--include-unknown",
+    "--disable-interactivity"
 )
 
 switch ($UpgradeExit) {
